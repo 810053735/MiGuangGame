@@ -1,24 +1,380 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello Page</title>
+    <title>迷光网络科技 - 一群探索的小伙伴</title>
     <style>
+        :root {
+            --primary-color: #6C5CE7;
+            --secondary-color: #00B894;
+            --dark-color: #2D3436;
+            --light-color: #F5F6FA;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
         body {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="white"><circle cx="25" cy="25" r="3"/><circle cx="75" cy="25" r="3"/><circle cx="50" cy="50" r="3"/><circle cx="25" cy="75" r="3"/><circle cx="75" cy="75" r="3"/></svg>');
+            background-size: 50px 50px;
+        }
+        
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+        
+        .intro {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .intro h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .intro p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        .team-section {
+            margin: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .team-member {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .member-image {
+            height: 200px;
+            background-color: #eee;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="%236C5CE7" opacity="0.1"><circle cx="50" cy="30" r="20"/><path d="M50,60 C30,60 10,80 10,100 L90,100 C90,80 70,60 50,60 Z"/></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .member-info {
+            padding: 1.5rem;
+        }
+        
+        .member-info h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .member-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .services {
+            margin: 4rem 0;
+        }
+        
+        .service-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .service-card h3 {
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .footer-links {
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
+            list-style: none;
+            margin: 2rem 0;
         }
-        h1 {
-            font-size: 3rem;
+        
+        .footer-links li {
+            margin: 0 1rem;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+        }
+        
+        .copyright {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+            }
+            
+            .nav-links li {
+                margin: 0 0.5rem;
+            }
+            
+            .team-grid, .service-cards {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>hello</h1>
+    <header>
+        <div class="header-bg"></div>
+        <div class="header-content">
+            <div class="logo">迷光网络科技</div>
+            <div class="tagline">一群探索的小伙伴</div>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="nav-container">
+            <div class="logo">迷光网络</div>
+            <ul class="nav-links">
+                <li><a href="#home">首页</a></li>
+                <li><a href="#about">关于我们</a></li>
+                <li><a href="#services">服务</a></li>
+                <li><a href="#team">团队</a></li>
+                <li><a href="#contact">联系我们</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <section id="home" class="intro">
+            <h2>欢迎来到迷光网络科技</h2>
+            <p>我们是一群充满好奇心和创造力的探索者，致力于用技术点亮数字世界的每一个角落。从概念到实现，我们陪伴您的每一个创新想法。</p>
+            <p>在快速变化的数字时代，我们保持探索者的初心，不断学习、尝试和创新，为客户提供前沿的网络技术解决方案。</p>
+        </section>
+        
+        <section id="about" class="team-section">
+            <h2 class="section-title">我们的故事</h2>
+            <div class="intro">
+                <p>迷光网络科技成立于2020年，由几位热爱技术的朋友共同创立。我们相信技术的价值在于连接人与人、人与信息、人与未来。</p>
+                <p>"一群探索的小伙伴"不仅是我们团队的写照，也是我们对待每一个项目的态度 - 保持好奇心，勇于尝试，共同成长。</p>
+            </div>
+        </section>
+        
+        <section id="services" class="services">
+            <h2 class="section-title">我们的服务</h2>
+            <div class="service-cards">
+                <div class="service-card">
+                    <div class="service-icon">💻</div>
+                    <h3>网站开发</h3>
+                    <p>从企业官网到复杂Web应用，我们提供全方位的网站开发服务，确保您的在线形象专业而高效。</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📱</div>
+                    <h3>移动应用</h3>
+                    <p>针对iOS和Android平台的定制移动应用开发，帮助您在移动互联网时代抓住机遇。</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">☁️</div>
+                    <h3>云计算解决方案</h3>
+                    <p>基于AWS、Azure和阿里云等平台的云服务部署和优化，让您的业务更具弹性。</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="team" class="team-section">
+            <h2 class="section-title">探索的小伙伴们</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-image"></div>
+                    <div class="member-info">
+                        <h3>张明</h3>
+                        <p>技术总监</p>
+                        <p>10年全栈开发经验，热爱解决复杂技术问题</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image"></div>
+                    <div class="member-info">
+                        <h3>李华</h3>
+                        <p>产品经理</p>
+                        <p>善于将客户需求转化为优秀产品设计</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image"></div>
+                    <div class="member-info">
+                        <h3>王芳</h3>
+                        <p>UI/UX设计师</p>
+                        <p>专注于创造美观且易用的用户界面</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image"></div>
+                    <div class="member-info">
+                        <h3>陈晨</h3>
+                        <p>前端工程师</p>
+                        <p>React和Vue专家，追求完美的用户体验</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer id="contact">
+        <div class="footer-content">
+            <h2>迷光网络科技</h2>
+            <p>一群探索的小伙伴</p>
+            <ul class="footer-links">
+                <li><a href="mailto:info@milight-tech.com">info@milight-tech.com</a></li>
+                <li><a href="tel:+8613800138000">+86 138 0013 8000</a></li>
+                <li><a href="#">微博</a></li>
+                <li><a href="#">微信公众号</a></li>
+            </ul>
+            <p class="copyright">© 2025 迷光网络科技 版权所有</p>
+        </div>
+    </footer>
 </body>
 </html>
